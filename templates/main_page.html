@@ -1,0 +1,138 @@
+{% extends "index.html"%}
+
+{% block icerik %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 card-div">
+            <div class="card">
+               <div class="card-header d-flex justify-content-between" id="pointer" onclick="onClickEvent('vis','aciklama')">
+                    <h4 class="d-inline">Organization <small style="font-size:12px;" id="aciklama">(Click for show)</small></h4>
+               </div>
+               <div class="card-body" id="vis" style="display:none">
+                   <form method="POST">
+                    {% csrf_token %}
+                    {% for form in organization_form %}
+                       <label class="form_label">{{ form.label }} :</label>
+                       {{form}} <br>
+                       {% endfor %}
+                    <button type="submit" class="btn btn-outline-primary">Ok</button>
+                </form>
+              </div>
+            </div>
+
+            <!--<div class="card">
+               <div class="card-header d-flex justify-content-between" id="pointer2" onclick="onClickEvent('vis2','aciklama2')">
+                    <h4 class="d-inline">Document Form <small style="font-size:12px;" id="aciklama2">(Click for show)</small></h4>
+               </div>
+               <div class="card-body" id="vis2" style="display:none">
+                   <form method="POST">
+                        {% csrf_token %}
+                        {% for form in document_form %}
+                            <label class="form_label">{{ form.label }} :</label>
+                            {{ form }} <br>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-outline-primary">Ok</button>
+                    </form>
+              </div>
+            </div> -->
+
+            <div class="card">
+               <div class="card-header d-flex justify-content-between" id="pointer3" onclick="onClickEvent('vis3','aciklama3')">
+                    <h4 class="d-inline">Document Package Form <small style="font-size:12px;" id="aciklama3">(Click for show)</small></h4>
+               </div>
+               <div class="card-body" id="vis3" style="display:none">
+                   <form method="POST">
+                        {% csrf_token %}
+                        {% for form in document_package_form %}
+                            <label class="form_label">{{ form.label }} :</label>
+                            {{ form }} <br>
+                        {% endfor %}
+                       <button type="submit" class="btn btn-outline-primary">Ok</button> <br>
+                   </form>
+              </div>
+            </div>
+
+             <div class="card">
+               <div class="card-header d-flex justify-content-between" id="pointer4" onclick="onClickEvent('vis4','aciklama4')">
+                    <h4 class="d-inline">Organization Member Form <small style="font-size:12px;" id="aciklama4">(Click for show)</small></h4>
+               </div>
+               <div class="card-body" id="vis4" style="display:none">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% for form in organization_member_form %}
+                            <label class="form_label">{{ form.label }} :</label>
+                            {{ form }} <br>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-outline-primary">Ok</button> <br>
+                    </form>
+              </div>
+            </div>
+
+             <div class="card">
+               <div class="card-header d-flex justify-content-between" id="pointer5" onclick="onClickEvent('vis5','aciklama5')">
+                    <h4 class="d-inline">Folder Form <small style="font-size:12px;" id="aciklama5">(Click for show)</small></h4>
+               </div>
+               <div class="card-body" id="vis5" style="display:none">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% for form in folder_form %}
+                            <label class="form_label">{{ form.label }} :</label>
+                            {{ form }} <br>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-outline-primary">Ok</button> <br>
+                    </form>
+              </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<style>
+    .card{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    #pointer, #pointer2, #pointer3, #pointer4, #pointer5{
+        cursor:pointer;
+    }
+    .form_label{
+        margin-right: 20px;
+        width: 100px;
+     }
+</style>
+<script>
+function onClickEvent(divide, yaziDegis)
+{
+
+    var opacity = 0
+    var divide_var = document.getElementById(divide)
+    var yaziDegis_var = document.getElementById(yaziDegis)
+    if (divide_var.style.display == "block")
+    {
+        yaziDegis_var.innerHTML = '(Click for show)'
+        divide_var.style.display = 'none'
+    }
+    else
+    {
+        const animation = setInterval(() => {
+            if (opacity >= 1)
+            {
+                clearInterval(animation)
+            }
+            else
+            {
+                if (divide_var.style.display !== 'block'){
+                    yaziDegis_var.innerHTML = '(Click for hide)'
+                    divide_var.style.display = 'block'
+                }
+                opacity = opacity + 0.05
+                divide_var.style.opacity = opacity
+                console.log(opacity)
+            }
+        }, 25)
+    }
+}
+</script>
+
+{% endblock icerik %}

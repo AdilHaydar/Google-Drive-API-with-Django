@@ -1,0 +1,75 @@
+{% extends "index.html"%}
+
+{% block icerik %}
+    <div class="container-fluid">
+        <form enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div id="border_div">
+                    <label class="mail_label">Subject : </label>
+                    <input class="input_field" type="text" placeholder="Title" value="" name="subject" id="id_subject"/> <br>
+                    <label class="mail_label">To : </label>
+                    <input class="input_field" type="text" placeholder="Email Adress" value="" name="to" id="id_to" /> <br>
+
+                    <label class="mail_label" id="label_object">Object : </label> <br>
+                    <textarea class="input_field" name = "object" id="id_object"></textarea> <br>
+                    {% for form in document_form %}
+                        <label class="mail_label">{{ form.label }} :</label>
+                        {{ form }} <br>
+                    {% endfor %}
+                    <!-- <label class="mail_label">File : </label>
+                    <input class="input_field" type="file" name="file" id="id_file" multiple/> <br> -->
+
+                    <input type="submit" class="input_button" value="Submit" />
+                </div>
+            </div>
+        </form>
+    </div>
+<style>
+    #border_div{
+        border: 2px solid rgba(10,20,30,0.7);
+        margin-left : 100px;
+        padding : 20px;
+        -webkit-box-shadow: 10px 10px 10px 5px rgba(10,20,30,0.75);
+        -moz-box-shadow: 10px 10px 10px 5px rgba(10,20,30,0.75);
+        box-shadow: 0px 0px 15px 12px rgba(10,20,30,0.75);
+    }
+    #label_object{
+        margin-top: -100px;
+    }
+    .mail_label{
+        margin-right: 20px;
+        width: 100px;
+    }
+    #id_object{
+        height: 500px;
+        margin-left: 124px;
+        margin-top: -30px;
+    }
+    .input_field{
+        margin-top: 5px;
+        width: 500px;
+        border: 2px outset rgba(164,207,245,0.75);
+        border-radius: 5px;
+        padding: 5px;
+        transition: 0.25s
+    }
+    .input_field:hover, .input_field:focus, .input_button:hover{
+        -webkit-box-shadow: 0px 0px 10px 5px rgba(164,207,245,0.75);
+        -moz-box-shadow: 0px 0px 10px 5px rgba(164,207,245,0.75);
+        box-shadow: 0px 0px 10px 5px rgba(164,207,245,0.75);
+    }
+    .input_button{
+        width: 100px;
+        margin-left: 124px;
+        margin-top: 20px;
+        border: 2px outset rgba(164,207,245,0.75);
+        border-radius: 5px;
+        padding: 5px;
+        transition: 0.25s
+    }
+    #id_package{
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}
